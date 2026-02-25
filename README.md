@@ -1,12 +1,18 @@
-# Ronin Wallet to Koinly CSV Exporter
+<h1 align="center">Ronin to Koinly</h1>
+<p align="center">
+    <a href="https://github.com/rios0rios0/ronin-to-koinly/releases/latest">
+        <img src="https://img.shields.io/github/release/rios0rios0/ronin-to-koinly.svg?style=for-the-badge&logo=github" alt="Latest Release"/></a>
+    <a href="https://github.com/rios0rios0/ronin-to-koinly/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/rios0rios0/ronin-to-koinly.svg?style=for-the-badge&logo=github" alt="License"/></a>
+</p>
 
-This project is a Go application that reads transaction data from the Ronin wallet API and exports it to a CSV file in the Koinly format.
+A Go application that reads transaction data from the Ronin wallet API and exports it to a CSV file in the Koinly format.
 
 ## Features
 
-- Fetches transaction data from the Ronin wallet API.
-- Parses the transaction data.
-- Exports the data to a CSV file compatible with Koinly.
+- Fetches transaction data from the Ronin wallet API
+- Parses the transaction data
+- Exports the data to a CSV file compatible with Koinly
 
 ## Requirements
 
@@ -17,14 +23,14 @@ This project is a Go application that reads transaction data from the Ronin wall
 
 1. Clone the repository:
 
-    ```sh
-    git clone https://github.com/yourusername/ronin-to-koinly.git
+    ```bash
+    git clone https://github.com/rios0rios0/ronin-to-koinly.git
     cd ronin-to-koinly
     ```
 
 2. Install the required Go packages:
 
-    ```sh
+    ```bash
     go get -u github.com/go-resty/resty/v2
     go get -u github.com/gocarina/gocsv
     ```
@@ -39,14 +45,14 @@ This project is a Go application that reads transaction data from the Ronin wall
 
 2. Build and run the application:
 
-    ```sh
+    ```bash
     go build -o ronin-to-koinly
     ./ronin-to-koinly
     ```
 
 3. The application will create a `koinly_transactions.csv` file in the current directory with the transaction data.
 
-## Example
+## Example Output
 
 Here is an example of the CSV output:
 
@@ -63,12 +69,3 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- [Resty](https://github.com/go-resty/resty) - Simple HTTP and REST client for Go inspired by Ruby rest-client.
-- [GoCSV](https://github.com/gocarina/gocsv) - The Go library for CSV serialization and deserialization.
-
-## Contact
-
-For any questions or suggestions, feel free to open an issue or contact me at [rios0rios0@outlook.com].
