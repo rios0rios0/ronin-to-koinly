@@ -66,7 +66,7 @@ Date,Sent Amount,Sent Currency,Received Amount,Received Currency,Fee Amount,Fee 
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
