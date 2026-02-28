@@ -8,6 +8,7 @@ development practices, refer to the **[Development Guide](https://github.com/rio
 ## Prerequisites
 
 - [Go](https://go.dev/dl/) 1.26+
+- [Git](https://git-scm.com/downloads) 2.30+
 
 ## Development Workflow
 
@@ -17,14 +18,23 @@ development practices, refer to the **[Development Guide](https://github.com/rio
    ```bash
    go mod download
    ```
-4. Build the binary:
+4. Build the project:
    ```bash
-   go build -o bin/ronin-to-koinly .
+   go build -o ronin-to-koinly .
    ```
-5. Make your changes
+5. Run the application:
+   ```bash
+   ./ronin-to-koinly
+   ```
 6. Run tests:
    ```bash
    go test ./...
    ```
-7. Commit following the [commit conventions](https://github.com/rios0rios0/guide/wiki/Life-Cycle/Git-Flow)
-8. Open a pull request against `main`
+7. Format and vet the code:
+   ```bash
+   go fmt ./...
+   go vet ./...
+   ```
+8. Update `CHANGELOG.md` under `[Unreleased]`
+9. Commit following the [commit conventions](https://github.com/rios0rios0/guide/wiki/Life-Cycle/Git-Flow)
+10. Open a pull request against `main`
