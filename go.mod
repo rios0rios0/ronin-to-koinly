@@ -1,7 +1,7 @@
 module github.com/rios0rios0/ronin-to-koinly
 
-go 1.26.1
+go 1.26.2
 
 require github.com/go-resty/resty/v2 v2.17.2
 
-require golang.org/x/net v0.52.0 // indirect
+require golang.org/x/net v0.53.0 // indirect
