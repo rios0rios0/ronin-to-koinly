@@ -14,13 +14,18 @@ crypto tax and portfolio tracking tool.
 │   ├── copilot-instructions.md   # AI assistant context (this file)
 │   └── workflows/
 │       └── default.yaml          # CI/CD pipeline (delegates to shared Go binary workflow)
+├── cmd/
+│   └── ronin-to-koinly/
+│       └── main.go               # CLI entrypoint: API fetch → CSV write
+├── internal/                     # Scaffolded for future domain/infrastructure layers
+├── test/                         # Scaffolded for future tests
 ├── CHANGELOG.md                  # Version history following Keep a Changelog
 ├── CONTRIBUTING.md               # Development workflow and prerequisites
 ├── LICENSE                       # MIT license
+├── Makefile                      # Build targets (wraps shared pipelines Makefile)
 ├── README.md                     # Project description and usage guide
 ├── go.mod                        # Go module definition (module: github.com/rios0rios0/ronin-to-koinly)
-├── go.sum                        # Dependency checksums
-└── main.go                       # Single-file entrypoint: API fetch → CSV write
+└── go.sum                        # Dependency checksums
 ```
 
 ## Technology Stack
@@ -31,32 +36,26 @@ crypto tax and portfolio tracking tool.
 
 ## Build, Test, and Run Commands
 
+All quality gate commands use the shared Makefile from `~/Development/github.com/rios0rios0/pipelines`. Always use Makefile targets instead of calling tool binaries directly:
+
 ```bash
-# Install / tidy dependencies
-go mod download
+make build        # Build binary to bin/ronin-to-koinly (stripped)
+make debug        # Debug build (no optimizations)
+make run          # Run via go run
+make install      # Build and copy to ~/.local/bin/
 
-# Build the binary
-go build -o ronin-to-koinly .
+make lint         # Run golangci-lint (via pipelines)
+make test         # Run test suite (via pipelines)
+make sast         # Run full SAST suite: CodeQL, Semgrep, Trivy, Hadolint, Gitleaks
 
-# Run the binary (requires network access to the Ronin API)
-./ronin-to-koinly
-
-# Run all tests
-go test ./...
-
-# Format code
-go fmt ./...
-
-# Vet code
-go vet ./...
+go mod download   # Install dependencies
+go mod tidy       # Remove unused dependencies
 ```
-
-Build and tests typically complete in a few seconds on any modern machine.
 
 ## Architecture and Design Patterns
 
-- **Single-file CLI**: all logic lives in `main.go`; there are no sub-packages yet.
-- **Transaction struct** mirrors the Koinly CSV column layout and is tagged with `csv:` field tags.
+- **Single-file CLI**: all logic lives in `cmd/ronin-to-koinly/main.go`; there are no sub-packages yet.
+- **Transaction struct** mirrors the Koinly CSV column layout (Date, SentAmount/Currency, ReceivedAmount/Currency, FeeAmount/Currency, Tag).
 - **HTTP → CSV pipeline**: `resty` client fetches JSON from the Ronin API → data is unmarshalled
   into `[]Transaction` → written row-by-row to `koinly_transactions.csv` via the standard
   `encoding/csv` writer.
@@ -81,7 +80,7 @@ The shared workflow handles linting, testing, building, and releasing the binary
 1. Fork and clone the repository.
 2. Create a feature branch: `git checkout -b feat/my-change`
 3. Install dependencies: `go mod download`
-4. Make changes to `main.go` (or add new `.go` files as the project grows).
+4. Make changes to `cmd/ronin-to-koinly/main.go` (or add new `.go` files as the project grows).
 5. Format and vet: `go fmt ./... && go vet ./...`
 6. Run tests: `go test ./...`
 7. Update `CHANGELOG.md` under `[Unreleased]`.
@@ -106,13 +105,13 @@ The shared workflow handles linting, testing, building, and releasing the binary
 | Add a dependency | `go get <module>@<version>` |
 | Remove unused dependencies | `go mod tidy` |
 | Check for outdated deps | `go list -u -m all` |
-| Cross-compile (e.g., Linux amd64) | `GOOS=linux GOARCH=amd64 go build -o ronin-to-koinly .` |
+| Static musl build | `make build-musl` |
 
 ## Troubleshooting
 
 - **API errors**: The Ronin wallet API endpoint (`https://api.roninchain.com/wallet/transactions`)
   may require authentication headers or a wallet address query parameter. Update the `client.R().Get()`
-  call in `main.go` accordingly.
+  call in `cmd/ronin-to-koinly/main.go` accordingly.
 - **Empty CSV**: The JSON → struct unmarshalling is currently a placeholder (commented out). Implement
   `json.Unmarshal(resp.Body(), &transactions)` with the correct struct mapping once the API response
   schema is known.
