@@ -16,10 +16,12 @@ Exceptions are acceptable depending on the circumstances (critical bug fixes tha
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-04-28
+
 ### Changed
 
-- refreshed `CLAUDE.md` to correct the version reference from v0.1.0 to v0.1.1
 - refreshed `.github/copilot-instructions.md` to fix incorrect file paths, add Makefile build targets, correct the repository structure, and remove a false claim about csv struct tags
+- refreshed `CLAUDE.md` to correct the version reference from v0.1.0 to v0.1.1
 
 ## [0.1.1] - 2026-04-15
 
