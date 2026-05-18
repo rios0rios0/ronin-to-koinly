@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-`ronin-to-koinly` is a Go CLI that fetches transaction data from the Ronin blockchain wallet API and exports it to a CSV file formatted for [Koinly](https://koinly.io/) (crypto tax tracking). Currently at v0.1.1 with the core pipeline partially implemented (API response unmarshalling is a placeholder).
+`ronin-to-koinly` is a Go CLI that fetches transaction data from the Ronin blockchain wallet API and exports it to a CSV file formatted for [Koinly](https://koinly.io/) (crypto tax tracking). Currently at v0.1.3 with the core pipeline partially implemented (API response unmarshalling is a placeholder).
 
 ## Build and Development Commands
 
