@@ -19,6 +19,7 @@ Exceptions are acceptable depending on the circumstances (critical bug fixes tha
 ### Changed
 
 - changed the Go module dependencies to their latest versions
+- refreshed `CLAUDE.md` to correct the version reference from v0.1.1 to v0.1.3
 
 ## [0.1.3] - 2026-05-08
 
