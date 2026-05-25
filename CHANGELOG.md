@@ -16,6 +16,8 @@ Exceptions are acceptable depending on the circumstances (critical bug fixes tha
 
 ## [Unreleased]
 
+## [0.1.6] - 2026-05-25
+
 ### Changed
 
 - refreshed `CLAUDE.md` to correct the version reference from v0.1.3 to v0.1.5
