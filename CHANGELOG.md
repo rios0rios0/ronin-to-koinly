@@ -16,6 +16,10 @@ Exceptions are acceptable depending on the circumstances (critical bug fixes tha
 
 ## [Unreleased]
 
+### Changed
+
+- refreshed `CLAUDE.md` to drop the hard-coded version reference that drifts every release
+
 ## [0.1.6] - 2026-05-25
 
 ### Changed
