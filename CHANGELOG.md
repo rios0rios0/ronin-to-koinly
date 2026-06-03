@@ -16,10 +16,12 @@ Exceptions are acceptable depending on the circumstances (critical bug fixes tha
 
 ## [Unreleased]
 
+## [0.1.7] - 2026-06-03
+
 ### Changed
 
-- refreshed `CLAUDE.md` to drop the hard-coded version reference that drifts every release
 - changed the Go version to `1.26.4` and updated all module dependencies
+- refreshed `CLAUDE.md` to drop the hard-coded version reference that drifts every release
 
 ## [0.1.6] - 2026-05-25
 
