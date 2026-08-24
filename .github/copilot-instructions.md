@@ -30,7 +30,7 @@ crypto tax and portfolio tracking tool.
 
 ## Technology Stack
 
-- **Language**: Go 1.26+
+- **Language**: Go 1.27+
 - **HTTP client**: [`github.com/go-resty/resty/v2`](https://github.com/go-resty/resty) v2.17.2
 - **Indirect dependency**: `golang.org/x/net`
 
@@ -115,4 +115,4 @@ The shared workflow handles linting, testing, building, and releasing the binary
 - **Empty CSV**: The JSON → struct unmarshalling is currently a placeholder (commented out). Implement
   `json.Unmarshal(resp.Body(), &transactions)` with the correct struct mapping once the API response
   schema is known.
-- **Go version mismatch**: Ensure your local Go version is 1.26 or higher (`go version`).
+- **Go version mismatch**: Ensure your local Go version is 1.27 or higher (`go version`).
