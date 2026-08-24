@@ -37,7 +37,7 @@ The `internal/` and `test/` directories are scaffolded (empty with `.gitkeep`) f
 ## Dependencies
 
 - `github.com/go-resty/resty/v2` -- HTTP client for Ronin API calls
-- Go 1.26+ required
+- Go 1.27+ required
 
 ## CI/CD
 
