@@ -41,7 +41,9 @@ The `internal/` and `test/` directories are scaffolded (empty with `.gitkeep`) f
 
 ## CI/CD
 
-GitHub Actions workflow (`.github/workflows/default.yaml`) delegates entirely to the shared reusable workflow at `rios0rios0/pipelines/.github/workflows/go-binary.yaml@main`. Triggers on pushes to main, tag pushes, PRs targeting main, and manual dispatch.
+The main pipeline (`.github/workflows/default.yaml`) delegates entirely to the shared reusable workflow at `rios0rios0/pipelines/.github/workflows/go-binary.yaml@main`. Triggers on pushes to main, tag pushes, PRs targeting main, and manual dispatch.
+
+Two additional workflows call shared reusable workflows for AI automation: `claude-review.yaml` (automated PR review) and `claude-mention.yaml` (`@claude` mention responder). Both authenticate with the `CLAUDE_CODE_OAUTH_TOKEN` secret.
 
 ## Current State
 
