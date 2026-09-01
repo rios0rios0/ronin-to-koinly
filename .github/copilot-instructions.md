@@ -12,8 +12,12 @@ crypto tax and portfolio tracking tool.
 .
 ├── .github/
 │   ├── copilot-instructions.md   # AI assistant context (this file)
+│   ├── skills/
+│   │   └── code-review/SKILL.md  # Copilot code-review skill for this repo
 │   └── workflows/
-│       └── default.yaml          # CI/CD pipeline (delegates to shared Go binary workflow)
+│       ├── default.yaml          # CI/CD pipeline (delegates to shared Go binary workflow)
+│       ├── claude-review.yaml    # Automated PR review (shared reusable workflow)
+│       └── claude-mention.yaml   # @claude mention responder (shared reusable workflow)
 ├── cmd/
 │   └── ronin-to-koinly/
 │       └── main.go               # CLI entrypoint: API fetch → CSV write
@@ -74,6 +78,10 @@ reusable workflow at `rios0rios0/pipelines/.github/workflows/go-binary.yaml@main
 - Manual `workflow_dispatch`
 
 The shared workflow handles linting, testing, building, and releasing the binary automatically.
+
+Two further workflows drive AI automation via shared reusable workflows: `claude-review.yaml`
+(automated pull-request review) and `claude-mention.yaml` (`@claude` mention responder), both
+authenticating with the `CLAUDE_CODE_OAUTH_TOKEN` secret.
 
 ## Development Workflow
 
