@@ -21,11 +21,11 @@ development practices, refer to the **[Development Guide](https://github.com/rio
    ```
 4. Build the project:
    ```bash
-   go build -o ronin-to-koinly .
+   go build -o bin/ronin-to-koinly ./cmd/ronin-to-koinly
    ```
 5. Run the application:
    ```bash
-   ./ronin-to-koinly
+   ./bin/ronin-to-koinly
    ```
 6. Run tests:
    ```bash
@@ -40,5 +40,5 @@ development practices, refer to the **[Development Guide](https://github.com/rio
    ```bash
    chlog new --kind Added --body 'added the thing that was not there before'
    ```
-9. Commit following the [commit conventions](https://github.com/rios0rios0/guide/wiki/Life-Cycle/Git-Flow)
+9. Commit following the [commit conventions](https://github.com/rios0rios0/guide/wiki/Git-Flow)
 10. Open a pull request against `main`

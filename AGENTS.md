@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, GitHub Copilot) when working with code in this repository.
 
 ## Project Overview
 
@@ -8,46 +8,33 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build and Development Commands
 
-All quality gate commands use the shared Makefile from `~/Development/github.com/rios0rios0/pipelines`. **Never call tool binaries directly** -- always use Makefile targets:
+Quality gates run through Makefile targets that include the shared makefiles from `~/Development/github.com/rios0rios0/pipelines`. Use those targets rather than the tool binaries (golangci-lint, Semgrep, Trivy, Gitleaks, ...), because the shared targets load each tool's configuration:
 
 ```bash
 make build        # Build binary to bin/ronin-to-koinly (stripped)
 make debug        # Debug build (no optimizations)
+make build-musl   # Static build with musl-gcc
 make run          # Run via go run
 make install      # Build and copy to ~/.local/bin/
 
 make lint         # Run golangci-lint (via pipelines)
 make test         # Run test suite (via pipelines)
 make sast         # Run full SAST suite: CodeQL, Semgrep, Trivy, Hadolint, Gitleaks
-
-go mod download   # Install dependencies
-go mod tidy       # Remove unused dependencies
 ```
+
+The include path is `SCRIPTS_DIR` (override with `make lint SCRIPTS_DIR=<path>`). The includes are optional, so without that checkout `make lint`, `make test`, and `make sast` fail with "No rule to make target" while the local build targets above still work.
 
 ## Architecture
 
-Single-file CLI at `cmd/ronin-to-koinly/main.go`. The pipeline is: resty HTTP client fetches JSON from Ronin API -> unmarshals into `[]Transaction` -> writes to `koinly_transactions.csv` via `encoding/csv`.
+Single-file CLI at `cmd/ronin-to-koinly/main.go`. The pipeline is: resty HTTP client fetches JSON from Ronin API -> unmarshals into `[]Transaction` -> writes to `koinly_transactions.csv` in the current working directory via `encoding/csv`.
+
+The `Transaction` fields and the CSV header in `writeCSV` follow Koinly's column order; dates are written as `2006-01-02 15:04:05`. Changing either changes the import format.
 
 The `internal/` and `test/` directories are scaffolded (empty with `.gitkeep`) for future expansion into domain/infrastructure layers.
 
-## Key Types
-
-- **`Transaction`** (in `main.go`): maps to Koinly CSV columns -- Date, SentAmount/Currency, ReceivedAmount/Currency, FeeAmount/Currency, Tag.
-
-## Dependencies
-
-- `github.com/go-resty/resty/v2` -- HTTP client for Ronin API calls
-- Go 1.27+ required
-
 ## CI/CD
 
-The main pipeline (`.github/workflows/default.yaml`) delegates entirely to the shared reusable workflow at `rios0rios0/pipelines/.github/workflows/go-binary.yaml@main`. Triggers on pushes to main, tag pushes, PRs targeting main, and manual dispatch.
-
-Two additional workflows call shared reusable workflows for AI automation: `claude-review.yaml` (automated PR review) and `claude-mention.yaml` (`@claude` mention responder). Both authenticate with the `CLAUDE_CODE_OAUTH_TOKEN` secret.
-
-## Current State
-
-The API response unmarshalling is commented out as a placeholder -- the actual Ronin API response schema needs to be mapped. The output CSV is always named `koinly_transactions.csv` in the current working directory.
+All three workflows (`default.yaml`, `claude-review.yaml`, `claude-mention.yaml`) only call reusable workflows in `rios0rios0/pipelines`; pipeline behavior is changed there, not in this repository.
 
 <!-- chlog:start -->
 ## Changelog (chlog) — MANDATORY
