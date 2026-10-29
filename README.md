@@ -18,7 +18,7 @@ A Go application that reads transaction data from the Ronin wallet API and expor
 
 ## Requirements
 
-- Go 1.16 or higher
+- Go 1.27 or higher
 - Internet connection to access the Ronin wallet API
 
 ## Installation
@@ -33,23 +33,22 @@ A Go application that reads transaction data from the Ronin wallet API and expor
 2. Install the required Go packages:
 
     ```bash
-    go get -u github.com/go-resty/resty/v2
-    go get -u github.com/gocarina/gocsv
+    go mod download
     ```
 
 ## Usage
 
-1. Update the API endpoint in the `main.go` file to point to your Ronin wallet API endpoint.
+1. Update the API endpoint in `cmd/ronin-to-koinly/main.go` to point to your Ronin wallet API endpoint.
 
     ```go
-    resp, err := client.R().Get("https://api.roninchain.com/wallet/transactions")
+    _, err := client.R().SetContext(context.Background()).Get("https://api.roninchain.com/wallet/transactions")
     ```
 
 2. Build and run the application:
 
     ```bash
-    go build -o ronin-to-koinly
-    ./ronin-to-koinly
+    go build -o bin/ronin-to-koinly ./cmd/ronin-to-koinly
+    ./bin/ronin-to-koinly
     ```
 
 3. The application will create a `koinly_transactions.csv` file in the current directory with the transaction data.

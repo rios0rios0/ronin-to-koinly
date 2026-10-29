@@ -1,0 +1,3 @@
+kind: 'Changed'
+body: 'refreshed `AGENTS.md`, `.github/copilot-instructions.md`, `README.md`, and `CONTRIBUTING.md` to build from `./cmd/ronin-to-koinly`, require Go `1.27`, and note that the shared makefile targets need the pipelines checkout'
+time: '2026-10-29T00:31:43.9092804Z'

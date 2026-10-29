@@ -10,6 +10,7 @@ crypto tax and portfolio tracking tool.
 
 ```
 .
+├── .changes/unreleased/          # chlog fragments (CHANGELOG.md is generated from these)
 ├── .github/
 │   ├── copilot-instructions.md   # AI assistant context (this file)
 │   ├── skills/
@@ -23,7 +24,9 @@ crypto tax and portfolio tracking tool.
 │       └── main.go               # CLI entrypoint: API fetch → CSV write
 ├── internal/                     # Scaffolded for future domain/infrastructure layers
 ├── test/                         # Scaffolded for future tests
+├── AGENTS.md                     # Shared instructions for all coding agents
 ├── CHANGELOG.md                  # Version history following Keep a Changelog
+├── CLAUDE.md                     # Contains only `@AGENTS.md`
 ├── CONTRIBUTING.md               # Development workflow and prerequisites
 ├── LICENSE                       # MIT license
 ├── Makefile                      # Build targets (wraps shared pipelines Makefile)
@@ -55,6 +58,9 @@ make sast         # Run full SAST suite: CodeQL, Semgrep, Trivy, Hadolint, Gitle
 go mod download   # Install dependencies
 go mod tidy       # Remove unused dependencies
 ```
+
+The shared makefiles are included optionally from `SCRIPTS_DIR`. Without that checkout, `make lint`,
+`make test`, and `make sast` fail with "No rule to make target"; the build and run targets still work.
 
 ## Architecture and Design Patterns
 
@@ -92,7 +98,7 @@ authenticating with the `CLAUDE_CODE_OAUTH_TOKEN` secret.
 5. Format and vet: `go fmt ./... && go vet ./...`
 6. Run tests: `go test ./...`
 7. Add a changelog fragment: `chlog new --kind <Kind> --body '...'`, committed from `.changes/unreleased/`. Never edit `CHANGELOG.md` — it is generated from the fragments.
-8. Commit following [conventional commits](https://github.com/rios0rios0/guide/wiki/Life-Cycle/Git-Flow).
+8. Commit following [conventional commits](https://github.com/rios0rios0/guide/wiki/Git-Flow).
 9. Open a pull request against `main`.
 
 ## Coding Conventions
