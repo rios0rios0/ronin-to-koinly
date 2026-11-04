@@ -22,6 +22,14 @@ Exceptions are acceptable depending on the circumstances (critical bug fixes tha
 
 ## [Unreleased]
 
+## [0.3.8] - 2026-11-04
+
+### Changed
+
+- changed the Go module `golang.org/x/net` from `v0.61.0` to `v0.62.0`
+- moved the agent instructions from `CLAUDE.md` to `AGENTS.md`, keeping a `CLAUDE.md` that imports it, and pointed the `code-review` skill and `.github/copilot-instructions.md` at `AGENTS.md`
+- refreshed `AGENTS.md`, `.github/copilot-instructions.md`, `README.md`, and `CONTRIBUTING.md` to build from `./cmd/ronin-to-koinly`, require Go `1.27`, and note that the shared makefile targets need the pipelines checkout
+
 ## [0.3.7] - 2026-10-21
 
 ### Changed
