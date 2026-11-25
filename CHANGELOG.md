@@ -22,6 +22,12 @@ Exceptions are acceptable depending on the circumstances (critical bug fixes tha
 
 ## [Unreleased]
 
+## [0.3.10] - 2026-11-25
+
+### Changed
+
+- changed the Go module `golang.org/x/net` from `v0.62.0` to `v0.63.0`
+
 ## [0.3.9] - 2026-11-16
 
 ### Changed
